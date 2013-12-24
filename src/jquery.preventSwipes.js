@@ -66,11 +66,9 @@
   }
 
   function preventSwipes(e) {
-    console.time('preventSwipes');
     if (!anyElementScrollable($(e.target), e.deltaX, e.deltaY)) {
       e.preventDefault();
     }
-    console.timeEnd('preventSwipes');
   };
 
   function detachListener(delegate) {
