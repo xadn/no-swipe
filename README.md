@@ -5,6 +5,8 @@ A jQuery plugin for apps with lots of horizontal scrolling.
 
 Disables the swipe back/forward gesture in OSX.
 
+Requires jQuery Mouse Wheel <https://github.com/brandonaaron/jquery-mousewheel>
+
 
 Usage
 -----
