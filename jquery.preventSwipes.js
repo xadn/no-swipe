@@ -1,5 +1,5 @@
 /**
- * PreventSwipes v1
+ * PreventSwipes v0.0.1
  *  A jQuery Plugin that prevents forward/back swipe gestures.
  *
  * Intended for use with the latest jQuery
@@ -17,7 +17,7 @@
   var MOUSEWHEEL = 'mousewheel';
 
   function isTopOfDom(el) {
-    return el === doc.body;
+    return el.parentElement === null;
   }
 
   function isWideEnoughToScroll(el) {
@@ -28,7 +28,7 @@
     return dX < 0 && $el.scrollLeft() > 0;
   }
 
-  function isScrollableRight($el, dX) {
+  function isScrollableRight($el, el, dX) {
     return dX > 0 && $el.scrollLeft() < (el.scrollWidth - el.clientWidth);
   }
 
@@ -40,11 +40,11 @@
     return dY > 0 && $el.scrollTop() > 0;
   }
 
-  function isScrollableDown($el, dY) {
+  function isScrollableDown($el, el, dY) {
     return dY < 0 && $el.scrollTop() < (el.scrollHeight - el.clientHeight);
   }
 
-  function isScrollEnabled(axis, $el) {} {
+  function isScrollEnabled($el, axis) {
     var prop = 'overflow-' + axis;
     return $el.css(prop) === 'auto' || $el.css(prop) === 'scroll';
   }
@@ -57,11 +57,11 @@
       return false;
     } else {
       return(
-        (isWideEnoughToScroll(el) && (isScrollableLeft($el, dX) || isScrollableRight($el, dX)) && isScrollEnabled($el, 'x'))
+        (isWideEnoughToScroll(el) && (isScrollableLeft($el, dX) || isScrollableRight($el, el, dX)) && isScrollEnabled($el, 'x'))
         || 
-        (isHighEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, dY)) && isScrollEnabled($el, 'y'))
+        (isHighEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, el, dY)) && isScrollEnabled($el, 'y'))
         ||
-        eventWillScroll($el.parent(), dX, dY);
+        eventWillScroll($el.parent(), dX, dY)
       );
     }
   }

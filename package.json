@@ -1,0 +1,24 @@
+{
+  "name": "jquery-prevent-swipes",
+  "version": "0.0.1",
+  "description": "jQuery plugin to disable swipe back/forward gestures",
+  "main": "jquery.prevent-swipes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x-andy/jquery-prevent-swipes.git"
+  },
+  "keywords": [
+    "jQuery",
+    "mousewheel",
+    "swipes",
+    "gestures"
+  ],
+  "author": "Andy Niccolai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/x-andy/jquery-prevent-swipes/issues"
+  }
+}
