@@ -16,57 +16,58 @@
 
   var MOUSEWHEEL = 'mousewheel';
 
-  // Recursively search for a scrollable element
-  function anyElementScrollable($el, dX, dY) {
+  function isTopOfDom(el) {
+    return el === doc.body;
+  }
+
+  function isWideEnoughToScroll(el) {
+    return el.scrollWidth > el.clientWidth;
+  }
+
+  function isScrollableLeft($el, dX) {
+    return dX < 0 && $el.scrollLeft() > 0;
+  }
+
+  function isScrollableRight($el, dX) {
+    return dX > 0 && $el.scrollLeft() < (el.scrollWidth - el.clientWidth);
+  }
+
+  function isHighEnoughToScroll(el) {
+    return el.scrollHeight > el.clientHeight;
+  }
+
+  function isScrollableUp($el, dY) {
+    return dY > 0 && $el.scrollTop() > 0;
+  }
+
+  function isScrollableDown($el, dY) {
+    return dY < 0 && $el.scrollTop() < (el.scrollHeight - el.clientHeight);
+  }
+
+  function isScrollEnabled(axis, $el) {} {
+    var prop = 'overflow-' + axis;
+    return $el.css(prop) === 'auto' || $el.css(prop) === 'scroll';
+  }
+
+  // Recursively search up the DOM for an element that will scroll
+  function eventWillScroll($el, dX, dY) {
     var el = $el.get(0);
 
-    // Base case: we got to the top of the DOM without finding anything scrollable
-    if (el === doc.body) {
+    if (isTopOfDom(el)) {
       return false;
     } else {
       return(
-        // Can we scroll in the x-direction?
-        (
-          // Is the element actually wide enough to be scrolled?
-          el.scrollWidth > el.clientWidth
-          && (
-              // Is there room to scroll left?
-              (dX < 0 && $el.scrollLeft() > 0)
-
-              // Is there room to scroll right?
-            ||(dX > 0 && $el.scrollLeft() < (el.scrollWidth - el.clientWidth))
-          )
-
-          // Is scroll even enabled for this element?
-          && ($el.css('overflow-x') === 'auto' || $el.css('overflow-x') === 'scroll')
-        )
+        (isWideEnoughToScroll(el) && (isScrollableLeft($el, dX) || isScrollableRight($el, dX)) && isScrollEnabled($el, 'x'))
         || 
-        // Can we scroll in the y-direction?
-        (
-          // Is the element actually tall enough to be scrolled?
-          el.scrollHeight > el.clientHeight
-          && (
-              // Is there room to scroll up?
-              (dY > 0 && $el.scrollTop() > 0)
-
-              // Is there room to scroll down?
-            ||(dY < 0 && $el.scrollTop() < (el.scrollHeight - el.clientHeight))
-          )
-
-          // Is scroll even enabled for this element?
-          && ($el.css('overflow-y')  === 'auto' || $el.css('overflow-y') === 'scroll')
-        )
+        (isHighEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, dY)) && isScrollEnabled($el, 'y'))
         ||
-        // Is the parent able to scroll?
-        (
-          anyElementScrollable($el.parent(), dX, dY)
-        )
+        eventWillScroll($el.parent(), dX, dY);
       );
     }
   }
 
   function preventSwipes(e) {
-    if (!anyElementScrollable($(e.target), e.deltaX, e.deltaY)) {
+    if (!eventWillScroll($(e.target), e.deltaX, e.deltaY)) {
       e.preventDefault();
     }
   };
