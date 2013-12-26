@@ -1,0 +1,26 @@
+.layer1 {
+  height: 400px;
+  width: 800px;
+  overflow-x: scroll;
+}
+
+.layer2 {
+  background-color: #666;
+  height: 300px;
+  width: 1000px;
+}
+
+.panel {
+  background-color: #AAA;
+  width: 200px;
+  height: 400px;
+  float: left;
+  margin-left: 5px;
+  overflow-y: scroll;
+}
+
+.content {
+  background-color: #CCC; 
+  width: 100px;
+  height: 800px;
+}

@@ -20,5 +20,19 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/x-andy/jquery-prevent-swipes/issues"
-  }
+  },
+  "devDependencies": {
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.2",
+    "karma-jasmine": "~0.1.5",
+    "karma-coffee-preprocessor": "~0.1.1",
+    "requirejs": "~2.1.9",
+    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.8",
+    "karma-osx-reporter": "0.0.4"
+  },
+  "dependencies": {}
 }
