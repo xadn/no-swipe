@@ -1,8 +1,12 @@
-describe('#preventSwipes', function() {
+describe('$.fn.preventSwipes', function() {
   var eventSpy;
   
   it('works', function() {
     $('body').preventSwipes();
+  });
+
+  it('is chainable', function() {
+    expect($('body').preventSwipes()).toBe($('body'));
   });
 
   describe('when there are no scrollable elements', function() {
@@ -109,3 +113,12 @@ describe('#preventSwipes', function() {
   }
 });
 
+describe('$.fn.allowSwipes', function() {
+  it('works', function() {
+    $('body').allowSwipes();
+  });
+
+  it('is chainable', function() {
+    expect($('body').allowSwipes()).toBe($('body'));
+  });
+});

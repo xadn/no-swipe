@@ -73,20 +73,24 @@
   };
 
   function detachListener(delegate) {
-    if (delegate === void 0) {
-      $(this).off(MOUSEWHEEL, preventSwipes);
-    } else {
-      $(this).off(MOUSEWHEEL, delegate, preventSwipes);
-    }
+    return $(this).each(function() {
+      if (delegate === void 0) {
+        $(this).off(MOUSEWHEEL, preventSwipes);
+      } else {
+        $(this).off(MOUSEWHEEL, delegate, preventSwipes);
+      }
+    });
   }
 
   function attachListener(delegate) {
-    detachListener(delegate);
-    if (delegate === void 0) {
-      $(this).on(MOUSEWHEEL, preventSwipes);
-    } else {
-      $(this).on(MOUSEWHEEL, delegate, preventSwipes);
-    }
+    return $(this).each(function() {
+      detachListener(delegate);
+      if (delegate === void 0) {
+        $(this).on(MOUSEWHEEL, preventSwipes);
+      } else {
+        $(this).on(MOUSEWHEEL, delegate, preventSwipes);
+      }
+    });
   }
 
   // Extend jQuery's prototype to expose the plug-in.
