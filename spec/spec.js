@@ -83,12 +83,12 @@ describe('$.fn.preventSwipes', function() {
     });
   });
 
-  function scrolling(selector, options, expecation) {
+  function scrolling(selector, options, expectation) {
     describe('scrolling ' + JSON.stringify(options), function() {
       beforeEach(function() {
         $(selector).trigger(mousewheel(options));
       });
-      expecation();
+      expectation();
     })
   }
 
