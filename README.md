@@ -1,6 +1,8 @@
 jquery-prevent-swipes
 =====================
 
+[![Build Status](https://travis-ci.org/x-andy/jquery-prevent-swipes.png)](https://travis-ci.org/x-andy/jquery-prevent-swipes)
+
 A jQuery plugin for apps with lots of horizontal scrolling.
 
 Disables the swipe back/forward gesture in OSX.
