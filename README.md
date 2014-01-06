@@ -1,7 +1,7 @@
 jquery-prevent-swipes
 =====================
 
-[![Build Status](https://travis-ci.org/x-andy/jquery-prevent-swipes.png)](https://travis-ci.org/x-andy/jquery-prevent-swipes)
+[![Build Status](https://travis-ci.org/xadn/jquery-prevent-swipes.png)](https://travis-ci.org/xadn/jquery-prevent-swipes)
 
 A jQuery plugin for apps with lots of horizontal scrolling.
 
