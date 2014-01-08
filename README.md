@@ -1,7 +1,7 @@
-jquery-prevent-swipes
+jquery-stopswipes
 =====================
 
-[![Build Status](https://travis-ci.org/xadn/jquery-prevent-swipes.png)](https://travis-ci.org/xadn/jquery-prevent-swipes)
+[![Build Status](https://travis-ci.org/xadn/jquery-stopswipes.png)](https://travis-ci.org/xadn/jquery-stopswipes)
 
 A jQuery plugin for apps with lots of horizontal scrolling.
 
@@ -13,7 +13,7 @@ Requires jQuery Mouse Wheel <https://github.com/brandonaaron/jquery-mousewheel>
 Usage
 -----
 ```javascript
-$(selector).preventSwipes();
+$(selector).stopSwipes();
 ```
 
 
@@ -23,4 +23,4 @@ Copyright 2013, Andy Niccolai
 
 Licensed under the MIT license.
 
-<https://github.com/x-andy/jquery-prevent-swipes/blob/master/LICENSE>
+<https://github.com/x-andy/jquery-stopswipes/blob/master/LICENSE>

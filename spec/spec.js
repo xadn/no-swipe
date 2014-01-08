@@ -1,19 +1,19 @@
-describe('$.fn.preventSwipes', function() {
+describe('#stopSwipes', function() {
   var eventSpy;
   
   it('works', function() {
-    $('body').preventSwipes();
+    $('body').stopSwipes();
   });
 
   it('is chainable', function() {
-    expect($('body').preventSwipes()).toBe($('body'));
+    expect($('body').stopSwipes()).toBe($('body'));
   });
 
   describe('when there are no scrollable elements', function() {
     beforeEach(function() {
       setFixtures('<div class="layer1"></div>');
       eventSpy = spyOnEvent('.layer1', 'mousewheel');
-      $('.layer1').preventSwipes();
+      $('.layer1').stopSwipes();
     });
 
     scrolling('.layer1', {deltaX:  1}, isPrevented);
@@ -30,7 +30,7 @@ describe('$.fn.preventSwipes', function() {
         </div>\
       ');
       eventSpy = spyOnEvent('.layer1', 'mousewheel');
-      $('.layer1').preventSwipes();
+      $('.layer1').stopSwipes();
     });
 
     describe('scrolled to the left', function() {
@@ -61,7 +61,7 @@ describe('$.fn.preventSwipes', function() {
         </div>\
       ');
       eventSpy = spyOnEvent('.panel', 'mousewheel');
-      $('.panel').preventSwipes();
+      $('.panel').stopSwipes();
     });
 
     describe('scrolled to the top', function() {

@@ -1,14 +1,14 @@
 {
-  "name": "jquery-prevent-swipes",
+  "name": "jquery-stopswipes",
   "version": "0.0.1",
   "description": "jQuery plugin to disable swipe back/forward gestures",
-  "main": "jquery.prevent-swipes.js",
+  "main": "jquery.stopswipes.js",
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/x-andy/jquery-prevent-swipes.git"
+    "url": "https://github.com/xadn/jquery-stopswipes.git"
   },
   "keywords": [
     "jQuery",
@@ -19,7 +19,7 @@
   "author": "Andy Niccolai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/x-andy/jquery-prevent-swipes/issues"
+    "url": "https://github.com/xadn/jquery-stopswipes/issues"
   },
   "devDependencies": {
     "karma-script-launcher": "~0.1.0",

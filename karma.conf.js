@@ -16,7 +16,7 @@ module.exports = function(config) {
   files: [
     'spec/vendor/jquery.js',
     'spec/vendor/*.js',
-    'jquery.preventSwipes.js',
+    'jquery.stopswipes.js',
     'spec/javascripts/fixtures/layers.css',
     'spec/*.js'
   ],

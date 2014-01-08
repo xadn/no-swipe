@@ -1,5 +1,5 @@
 /**
- * PreventSwipes v0.0.1
+ * Stop Swipes v0.0.1
  *  A jQuery Plugin that prevents forward/back swipe gestures.
  *
  * Intended for use with the latest jQuery
@@ -7,7 +7,7 @@
  *  
  * Copyright 2013, Andy Niccolai
  * Licensed under the MIT license.
- *  https://github.com/x-andy/jquery-prevent-swipes/blob/master/LICENSE
+ *  https://github.com/xadn/jquery-stopswipes/blob/master/LICENSE
  *
  * Date: Tuesday, December 24th 2013
  */
@@ -66,7 +66,7 @@
     }
   }
 
-  function preventSwipes(e) {
+  function stopSwipes(e) {
     if (!eventWillScroll($(e.target), e.deltaX, e.deltaY)) {
       e.preventDefault();
     }
@@ -75,9 +75,9 @@
   function detachListener(delegate) {
     return $(this).each(function() {
       if (delegate === void 0) {
-        $(this).off(MOUSEWHEEL, preventSwipes);
+        $(this).off(MOUSEWHEEL, stopSwipes);
       } else {
-        $(this).off(MOUSEWHEEL, delegate, preventSwipes);
+        $(this).off(MOUSEWHEEL, delegate, stopSwipes);
       }
     });
   }
@@ -86,9 +86,9 @@
     return $(this).each(function() {
       detachListener(delegate);
       if (delegate === void 0) {
-        $(this).on(MOUSEWHEEL, preventSwipes);
+        $(this).on(MOUSEWHEEL, stopSwipes);
       } else {
-        $(this).on(MOUSEWHEEL, delegate, preventSwipes);
+        $(this).on(MOUSEWHEEL, delegate, stopSwipes);
       }
     });
   }
@@ -96,7 +96,7 @@
   // Extend jQuery's prototype to expose the plug-in.
   $.extend(namespace, {
     allowSwipes: detachListener,
-    preventSwipes: attachListener
+    stopSwipes: attachListener
   });
 
 })(window, document, jQuery.fn, jQuery);
