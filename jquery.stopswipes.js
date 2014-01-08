@@ -32,7 +32,7 @@
     return dX > 0 && $el.scrollLeft() < (el.scrollWidth - el.clientWidth);
   }
 
-  function isHighEnoughToScroll(el) {
+  function isTallEnoughToScroll(el) {
     return el.scrollHeight > el.clientHeight;
   }
 
@@ -59,7 +59,7 @@
       return(
         (isWideEnoughToScroll(el) && (isScrollableLeft($el, dX) || isScrollableRight($el, el, dX)) && isScrollEnabled($el, 'x'))
         || 
-        (isHighEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, el, dY)) && isScrollEnabled($el, 'y'))
+        (isTallEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, el, dY)) && isScrollEnabled($el, 'y'))
         ||
         eventWillScroll($el.parent(), dX, dY)
       );
@@ -73,24 +73,20 @@
   };
 
   function detachListener(delegate) {
-    return $(this).each(function() {
-      if (delegate === void 0) {
-        $(this).off(MOUSEWHEEL, stopSwipes);
-      } else {
-        $(this).off(MOUSEWHEEL, delegate, stopSwipes);
-      }
-    });
+    if (delegate === void 0) {
+      return $(this).off(MOUSEWHEEL, stopSwipes);
+    } else {
+      return $(this).off(MOUSEWHEEL, delegate, stopSwipes);
+    }
   }
 
   function attachListener(delegate) {
-    return $(this).each(function() {
-      detachListener(delegate);
-      if (delegate === void 0) {
-        $(this).on(MOUSEWHEEL, stopSwipes);
-      } else {
-        $(this).on(MOUSEWHEEL, delegate, stopSwipes);
-      }
-    });
+    detachListener(delegate);
+    if (delegate === void 0) {
+      return $(this).on(MOUSEWHEEL, stopSwipes);
+    } else {
+      return $(this).on(MOUSEWHEEL, delegate, stopSwipes);
+    }
   }
 
   // Extend jQuery's prototype to expose the plug-in.
