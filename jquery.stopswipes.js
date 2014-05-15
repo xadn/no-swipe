@@ -4,66 +4,65 @@
  *
  * Intended for use with the latest jQuery
  *  http://code.jquery.com/jquery-latest.js
- *  
- * Copyright 2013, Andy Niccolai
+ *
+ * Copyright 2014, Andy Niccolai
  * Licensed under the MIT license.
  *  https://github.com/xadn/jquery-stopswipes/blob/master/LICENSE
- *
- * Date: Tuesday, December 24th 2013
  */
 (function(global, doc, namespace, $){
   'use strict';
 
   var MOUSEWHEEL = 'mousewheel';
 
-  function isTopOfDom(el) {
-    return el.parentElement === null;
-  }
-
-  function isWideEnoughToScroll(el) {
-    return el.scrollWidth > el.clientWidth;
-  }
-
-  function isScrollableLeft($el, dX) {
-    return dX < 0 && $el.scrollLeft() > 0;
-  }
-
-  function isScrollableRight($el, el, dX) {
-    return dX > 0 && $el.scrollLeft() < (el.scrollWidth - el.clientWidth);
-  }
-
-  function isTallEnoughToScroll(el) {
-    return el.scrollHeight > el.clientHeight;
-  }
-
-  function isScrollableUp($el, dY) {
-    return dY > 0 && $el.scrollTop() > 0;
-  }
-
-  function isScrollableDown($el, el, dY) {
-    return dY < 0 && $el.scrollTop() < (el.scrollHeight - el.clientHeight);
-  }
-
-  function isScrollEnabled($el, axis) {
-    var prop = 'overflow-' + axis;
-    return $el.css(prop) === 'auto' || $el.css(prop) === 'scroll';
-  }
-
-  // Recursively search up the DOM for an element that will scroll
   function eventWillScroll($el, dX, dY) {
-    var el = $el.get(0);
+    var el = $el[0];
 
-    if (isTopOfDom(el)) {
-      return false;
-    } else {
-      return(
-        (isWideEnoughToScroll(el) && (isScrollableLeft($el, dX) || isScrollableRight($el, el, dX)) && isScrollEnabled($el, 'x'))
-        || 
-        (isTallEnoughToScroll(el) && (isScrollableUp($el, dY) || isScrollableDown($el, el, dY)) && isScrollEnabled($el, 'y'))
-        ||
-        eventWillScroll($el.parent(), dX, dY)
-      );
+    // Until top of DOM
+    while (el.parentElement !== null) {
+      if (dY !== 0) {
+        // Scrolling up
+        if (dY > 0) {
+          if (el.scrollTop > 0) {
+            var overflowY = $(el).css('overflow-y');
+            if (overflowY === 'auto' || overflowY === 'scroll') {
+              return true
+            }
+          }
+        // Scrolling down
+        } else {
+          if (el.scrollHeight - el.clientHeight > el.scrollTop) {
+            var overflowY = $(el).css('overflow-y');
+            if (overflowY === 'auto' || overflowY === 'scroll') {
+              return true
+            }
+          }
+        }
+      }
+
+      if (dX !== 0) {
+        // Scrolling left
+        if (dX < 0) {
+          if (el.scrollLeft > 0) {
+            var overflowX = $(el).css('overflow-x');
+            if (overflowX === 'auto' || overflowX === 'scroll') {
+              return true
+            }
+          }
+        // Scrolling right
+        } else {
+          if (el.scrollWidth - el.clientWidth > el.scrollLeft) {
+            var overflowX = $(el).css('overflow-x');
+            if (overflowX === 'auto' || overflowX === 'scroll') {
+              return true
+            }
+          }
+        }
+      }
+
+      el = el.parentElement;
     }
+
+    return false;
   }
 
   function stopSwipes(e) {
