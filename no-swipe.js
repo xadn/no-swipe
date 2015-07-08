@@ -1,5 +1,5 @@
 /**
- * Stop Swipes v0.0.1
+ * No Swipes v0.0.1
  *  Attach to the wheel event to prevent forward & back swipe gestures.
  *
  * Copyright 2014, Andy Niccolai
@@ -9,7 +9,7 @@
 (function(){
   'use strict';
 
-  window.noSwipe = function eventWillScroll(e) {
+  function noSwipe(e) {
     var el = e.target;
     var dX = e.deltaX;
     var dY = e.deltaY;
@@ -47,7 +47,7 @@
         // Scrolling left
         if (dX < 0) {
           if (el.scrollLeft > 0) {
-            computedStyle = getComputedStyle(el);
+            computedStyle = computedStyle || getComputedStyle(el);
             overflowX = computedStyle.overflowX;
             if (overflowX === 'auto' || overflowX === 'scroll') {
               return true
@@ -56,7 +56,7 @@
         // Scrolling right
         } else {
           if (el.scrollWidth - el.clientWidth > el.scrollLeft) {
-            computedStyle = getComputedStyle(el);
+            computedStyle = computedStyle || getComputedStyle(el);
             overflowX = computedStyle.overflowX;
             if (overflowX === 'auto' || overflowX === 'scroll') {
               return true
@@ -70,4 +70,6 @@
 
     e.preventDefault();
   }
+
+  window.noSwipe = noSwipe;
 })();
