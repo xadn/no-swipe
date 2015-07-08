@@ -1,7 +1,7 @@
 no-swipe
 =====================
 
-[![Build Status](https://travis-ci.org/xadn/jquery-stopswipes.svg)](https://travis-ci.org/xadn/no-swipe)
+[![Build Status](https://travis-ci.org/xadn/no-swipe.svg)](https://travis-ci.org/xadn/no-swipe)
 
 ## Usage
 
