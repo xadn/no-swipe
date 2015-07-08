@@ -1,24 +1,12 @@
-jquery-stopswipes
+no-swipe
 =====================
 
-[![Build Status](https://travis-ci.org/xadn/jquery-stopswipes.svg)](https://travis-ci.org/xadn/jquery-stopswipes)
+[![Build Status](https://travis-ci.org/xadn/jquery-stopswipes.svg)](https://travis-ci.org/xadn/no-swipe)
 
-A jQuery plugin for apps with lots of horizontal scrolling.
-
-Disables the swipe back/forward gesture in OSX.
-
-Requires jQuery Mouse Wheel <https://github.com/brandonaaron/jquery-mousewheel>
+## Usage
 
 
-Usage
------
-```javascript
-$(selector).stopSwipes();
-```
-
-
-License
--------
+## License
 Copyright 2013, Andy Niccolai
 
 Licensed under the MIT license.

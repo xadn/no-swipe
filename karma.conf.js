@@ -14,23 +14,22 @@ module.exports = function(config) {
 
   // list of files / patterns to load in the browser
   files: [
-    'spec/vendor/jquery.js',
-    'spec/vendor/*.js',
-    'jquery.stopswipes.js',
-    'spec/javascripts/fixtures/layers.css',
+    'no-swipe.js',
     'spec/*.js'
   ],
 
 
   // list of files to exclude
   exclude: [
-    
+
   ],
 
 
   // test results reporter to use
   // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-  reporters: ['progress', 'osx'],
+  reporters: [
+    'progress'
+  ],
 
 
   // web server port

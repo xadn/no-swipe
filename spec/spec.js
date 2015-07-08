@@ -1,124 +1,172 @@
-describe('#stopSwipes', function() {
-  var eventSpy;
-  
-  it('works', function() {
-    $('body').stopSwipes();
+describe('#noSwipe', function() {
+  var container;
+
+  beforeEach(function() {
+    jasmine.addMatchers(getCustomMatchers());
+    container = document.createElement('div');
+    document.body.appendChild(container);
   });
 
-  it('is chainable', function() {
-    expect($('body').stopSwipes()).toBe($('body'));
+  afterEach(function() {
+    document.body.removeChild(container);
   });
 
-  describe('when there are no scrollable elements', function() {
+  describe('no scrollable elements', function() {
     beforeEach(function() {
-      setFixtures('<div class="layer1"></div>');
-      eventSpy = spyOnEvent('.layer1', 'mousewheel');
-      $('.layer1').stopSwipes();
+      renderIntoContainer('\
+        <div class="layer1" style="height:400px;width:800px;overflow-x:scroll;"></div>\
+      ');
     });
 
-    scrolling('.layer1', {deltaX:  1}, isPrevented);
-    scrolling('.layer1', {deltaX: -1}, isPrevented);
-    scrolling('.layer1', {deltaY:  1}, isPrevented);
-    scrolling('.layer1', {deltaY: -1}, isPrevented);
+    it('prevents scrolling left', function() {
+      expect(triggerWheelEvent('.layer1', {deltaX:  -1})).toBePrevented();
+    });
+
+    it('prevents scrolling right', function() {
+      expect(triggerWheelEvent('.layer1', {deltaX:  1})).toBePrevented();
+    });
+
+    it('prevents scrolling up', function() {
+      expect(triggerWheelEvent('.layer1', {deltaY: -1})).toBePrevented();
+    });
+
+    it('prevents scrolling down', function() {
+      expect(triggerWheelEvent('.layer1', {deltaY: 1})).toBePrevented();
+    });
   });
 
-  describe('when there is a horizontally scrollable element', function() {
+  describe('a horizontally scrollable element', function() {
     beforeEach(function() {
-      setFixtures('\
-        <div class="layer1">\
-          <div class="layer2"></div>\
+      renderIntoContainer('\
+        <div class="layer1" style="height:400px;width:800px;overflow-x:scroll;">\
+          <div class="layer2" style="height:300px;width:1000px;"></div>\
         </div>\
       ');
-      eventSpy = spyOnEvent('.layer1', 'mousewheel');
-      $('.layer1').stopSwipes();
     });
 
-    describe('scrolled to the left', function() {
-      scrolling('.layer2', {deltaX:  1}, isAllowed);
-      scrolling('.layer2', {deltaX: -1}, isPrevented);
-      scrolling('.layer2', {deltaY:  1}, isPrevented);
-      scrolling('.layer2', {deltaY: -1}, isPrevented);
+    describe('already scrolled to the left', function() {
+      beforeEach(function() {
+        container.querySelector('.layer1').scrollLeft = 0;
+      });
+
+      it('prevents scrolling left', function() {
+        expect(triggerWheelEvent('.layer2', {deltaX:  -1})).toBePrevented();
+      });
+
+      it('allows scrolling right', function() {
+        expect(triggerWheelEvent('.layer2', {deltaX:  1})).not.toBePrevented();
+      });
+
+      it('prevents scrolling up', function() {
+        expect(triggerWheelEvent('.layer2', {deltaY: -1})).toBePrevented();
+      });
+
+      it('prevents scrolling down', function() {
+        expect(triggerWheelEvent('.layer2', {deltaY: 1})).toBePrevented();
+      });
     });
 
     describe('scrolled to the right', function() {
       beforeEach(function() {
-        $('.layer1').scrollLeft(9999);
+        container.querySelector('.layer1').scrollLeft = 9999;
       });
 
-      scrolling('.layer2', {deltaX:  1}, isPrevented);
-      scrolling('.layer2', {deltaX: -1}, isAllowed);
-      scrolling('.layer2', {deltaY:  1}, isPrevented);
-      scrolling('.layer2', {deltaY: -1}, isPrevented);
-    });
+      it('allows scrolling left', function() {
+        expect(triggerWheelEvent('.layer2', {deltaX:  -1})).not.toBePrevented();
+      });
 
+      it('prevents scrolling right', function() {
+        expect(triggerWheelEvent('.layer2', {deltaX:  1})).toBePrevented();
+      });
+
+      it('prevents scrolling up', function() {
+        expect(triggerWheelEvent('.layer2', {deltaY: -1})).toBePrevented();
+      });
+
+      it('prevents scrolling down', function() {
+        expect(triggerWheelEvent('.layer2', {deltaY: 1})).toBePrevented();
+      });
+    });
   });
 
   describe('when there is a vertically scrollable element', function() {
     beforeEach(function() {
-      setFixtures('\
-        <div class="panel">\
-          <div class="content"></div>\
+      renderIntoContainer('\
+        <div class="panel" style="width:200px;height:400px;float:left;margin-left:5px;overflow-y:scroll;">\
+          <div class="content" style="width:100px;height:800px;"></div>\
         </div>\
       ');
-      eventSpy = spyOnEvent('.panel', 'mousewheel');
-      $('.panel').stopSwipes();
     });
 
     describe('scrolled to the top', function() {
-      scrolling('.content', {deltaX:  1}, isPrevented);
-      scrolling('.content', {deltaX: -1}, isPrevented);
-      scrolling('.content', {deltaY:  1}, isPrevented);
-      scrolling('.content', {deltaY: -1}, isAllowed);
+      beforeEach(function() {
+        container.querySelector('.panel').scrollTop = 0;
+      });
+
+      it('prevents scrolling left', function() {
+        expect(triggerWheelEvent('.content', {deltaX:  -1})).toBePrevented();
+      });
+
+      it('prevents scrolling right', function() {
+        expect(triggerWheelEvent('.content', {deltaX:  1})).toBePrevented();
+      });
+
+      it('prevents scrolling up', function() {
+        expect(triggerWheelEvent('.content', {deltaY: -1})).toBePrevented();
+      });
+
+      it('allows scrolling down', function() {
+        expect(triggerWheelEvent('.content', {deltaY: 1})).not.toBePrevented();
+      });
     });
 
     describe('scrolled to the bottom', function() {
       beforeEach(function() {
-        $('.panel').scrollTop(9999);
+        container.querySelector('.panel').scrollTop = 9999;
       });
 
-      scrolling('.content', {deltaX:  1}, isPrevented);
-      scrolling('.content', {deltaX: -1}, isPrevented);
-      scrolling('.content', {deltaY:  1}, isAllowed);
-      scrolling('.content', {deltaY: -1}, isPrevented);
-    });
-  });
-
-  function scrolling(selector, options, expectation) {
-    describe('scrolling ' + JSON.stringify(options), function() {
-      beforeEach(function() {
-        $(selector).trigger(mousewheel(options));
+      it('prevents scrolling left', function() {
+        expect(triggerWheelEvent('.content', {deltaX:  -1})).toBePrevented();
       });
-      expectation();
-    })
-  }
 
-  function isAllowed() {
-    it('is allowed', function() {
-      expect(eventSpy).not.toHaveBeenPrevented();
+      it('prevents scrolling right', function() {
+        expect(triggerWheelEvent('.content', {deltaX:  1})).toBePrevented();
+      });
+
+      it('allows scrolling up', function() {
+        expect(triggerWheelEvent('.content', {deltaY: -1})).not.toBePrevented();
+      });
+
+      it('prevents scrolling down', function() {
+        expect(triggerWheelEvent('.content', {deltaY: 1})).toBePrevented();
+      });
     });
-  }
-
-  function isPrevented() {
-    it('is prevented', function() {
-      expect(eventSpy).toHaveBeenPrevented();
-    });
-  }
-
-  function mousewheel(options) {
-    return $.extend({
-      type: 'mousewheel',
-      deltaX: 0,
-      deltaY: 0
-    }, options);
-  }
-});
-
-describe('$.fn.allowSwipes', function() {
-  it('works', function() {
-    $('body').allowSwipes();
   });
 
-  it('is chainable', function() {
-    expect($('body').allowSwipes()).toBe($('body'));
-  });
+  function triggerWheelEvent(selector, eventOptions) {
+    var event = {
+      target: container.querySelector(selector),
+      deltaX: eventOptions.deltaX || 0,
+      deltaY: eventOptions.deltaY || 0,
+      preventDefault: jasmine.createSpy('event#preventDefault')
+    };
+    noSwipe(event);
+    return event;
+  }
+
+  function renderIntoContainer(html) {
+    container.innerHTML = html;
+  }
+
+  function getCustomMatchers() {
+    return {
+      toBePrevented: function() {
+        return {
+          compare: function(event) {
+            return jasmine.matchers.toHaveBeenCalled().compare(event.preventDefault);
+          }
+        }
+      }
+    };
+  }
 });
