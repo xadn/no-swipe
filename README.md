@@ -3,7 +3,9 @@ no-swipe
 [![Circle CI](https://circleci.com/gh/xadn/no-swipe.svg?style=svg)](https://circleci.com/gh/xadn/no-swipe)
 
 ## Usage
-
+```javascript
+document.addEventListener('wheel', noSwipe);
+```
 
 ## License
 Copyright 2013, Andy Niccolai
