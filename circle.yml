@@ -5,6 +5,7 @@ deployment:
       - >
         git config --global user.email "andy.niccolai@gmail.com" &&
         git config --global user.name "Andy Niccolai" &&
+        git config --global push.default matching &&
         npm version patch -m "%s [ci skip]" &&
         git push
       - >
