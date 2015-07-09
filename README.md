@@ -12,4 +12,4 @@ Copyright 2013, Andy Niccolai
 
 Licensed under the MIT license.
 
-<https://github.com/xadn/no-swipe/blob/master/LICENSE>
+<https://github.com/xadn/no-swipe/blob/gh-pages/no-swipe.js>
