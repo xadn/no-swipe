@@ -5,7 +5,7 @@ deployment:
       - >
         git config --global user.email "andy.niccolai@gmail.com" &&
         git config --global user.name "Andy Niccolai" &&
-        git remote add gh https://xadn:$GITHUB_TOKEN@github.com/xadn/no-swipe.git
+        git remote add gh https://xadn:$GITHUB_TOKEN@github.com/xadn/no-swipe.git &&
         npm version patch -m "%s [ci skip]" &&
         git push gh $CIRCLE_BRANCH
       - >
