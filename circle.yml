@@ -1,0 +1,8 @@
+deployment:
+  npm_publish:
+    branch: gh-pages
+    commands:
+      - 'printf "//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n" > ~/.npmrc && npm whoami'
+      - 'npm version patch -m "%s [ci skip]"'
+      - git push
+      - npm publish
