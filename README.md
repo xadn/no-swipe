@@ -11,4 +11,4 @@ Copyright 2013, Andy Niccolai
 
 Licensed under the MIT license.
 
-<https://github.com/x-andy/jquery-stopswipes/blob/master/LICENSE>
+<https://github.com/xadn/no-swipe/blob/master/LICENSE>
