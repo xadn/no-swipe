@@ -1,7 +1,6 @@
 no-swipe
 =====================
-
-[![Build Status](https://travis-ci.org/xadn/no-swipe.svg)](https://travis-ci.org/xadn/no-swipe)
+[![Circle CI](https://circleci.com/gh/xadn/no-swipe.svg?style=svg)](https://circleci.com/gh/xadn/no-swipe)
 
 ## Usage
 
