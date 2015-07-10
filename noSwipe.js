@@ -28,7 +28,7 @@ function noSwipe(e) {
           computedStyle = getComputedStyle(el);
           overflowY = computedStyle.overflowY;
           if (overflowY === 'auto' || overflowY === 'scroll') {
-            return true
+            return;
           }
         }
       // Scrolling down
@@ -37,7 +37,7 @@ function noSwipe(e) {
           computedStyle = getComputedStyle(el);
           overflowY = computedStyle.overflowY;
           if (overflowY === 'auto' || overflowY === 'scroll') {
-            return true
+            return;
           }
         }
       }
@@ -50,7 +50,7 @@ function noSwipe(e) {
           computedStyle = computedStyle || getComputedStyle(el);
           overflowX = computedStyle.overflowX;
           if (overflowX === 'auto' || overflowX === 'scroll') {
-            return true
+            return;
           }
         }
       // Scrolling right
@@ -59,7 +59,7 @@ function noSwipe(e) {
           computedStyle = computedStyle || getComputedStyle(el);
           overflowX = computedStyle.overflowX;
           if (overflowX === 'auto' || overflowX === 'scroll') {
-            return true
+            return;
           }
         }
       }
