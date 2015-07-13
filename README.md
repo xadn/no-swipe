@@ -10,7 +10,7 @@ npm install --save no-swipe
 
 ## Usage
 ```javascript
-var noSwipe = require('no-swipe);
+var noSwipe = require('no-swipe');
 
 document.addEventListener('wheel', noSwipe);
 ```
