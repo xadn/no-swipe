@@ -1,6 +1,6 @@
 {
   "name": "no-swipe",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Disable swipe back/forward gestures",
   "main": "noSwipe.js",
   "files": [
