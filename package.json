@@ -3,6 +3,10 @@
   "version": "0.0.6",
   "description": "Disable swipe back/forward gestures",
   "main": "noSwipe.js",
+  "files": [
+    "noSwipe.js",
+    "LICENSE_MIT"
+  ],
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
