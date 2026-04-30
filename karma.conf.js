@@ -51,13 +51,10 @@ module.exports = function(config) {
 
   // Start these browsers, currently available:
   // - Chrome
+  // - ChromeHeadless
   // - ChromeCanary
   // - Firefox
-  // - Opera (has to be installed with `npm install karma-opera-launcher`)
-  // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
-  // - PhantomJS
-  // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-  browsers: ['PhantomJS'],
+  browsers: ['ChromeHeadless'],
 
 
   // If browser does not capture in given timeout [ms], kill it

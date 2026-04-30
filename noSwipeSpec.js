@@ -163,9 +163,15 @@ describe('#noSwipe', function() {
       toBePrevented: function() {
         return {
           compare: function(event) {
-            return jasmine.matchers.toHaveBeenCalled().compare(event.preventDefault);
+            var pass = event.preventDefault.calls.any();
+            return {
+              pass: pass,
+              message: pass
+                ? 'Expected preventDefault not to have been called'
+                : 'Expected preventDefault to have been called'
+            };
           }
-        }
+        };
       }
     };
   }
