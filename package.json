@@ -3,8 +3,10 @@
   "version": "0.0.7",
   "description": "Disable swipe back/forward gestures",
   "main": "noSwipe.js",
+  "types": "noSwipe.d.ts",
   "files": [
     "noSwipe.js",
+    "noSwipe.d.ts",
     "LICENSE_MIT"
   ],
   "scripts": {
